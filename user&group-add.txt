@@ -1,0 +1,30 @@
+
+
+
+User Management Commands:
+
+- `useradd [options] username`: Create a new user account.
+  - Common options: `-m` (create home directory), `-g` (initial group), `-s` (login shell), `-c` (comment/description), etc.
+- `usermod [options] username`: Modify an existing user account.
+  - Common options: `-l` (change username), `-u` (change UID), `-g` (change primary group), `-G` (add/remove supplementary groups), etc.
+- `userdel [options] username`: Delete a user account.
+  - Common options: `-r` (remove home directory and mail spool), `-f` (force removal).
+- `passwd [options] username`: Change a user's password.
+  - Common options: `-l` (lock account), `-u` (unlock account), `-e` (expire account), `-n` (set minimum password age), etc.
+- `id username`: Display user ID (UID), group ID (GID), and group memberships.
+- `chage [options] username`: Change user password expiry information.
+- `su [options] [username]`: Switch to another user account (substitute user).
+
+Group Management Commands:
+
+- `groupadd [options] groupname`: Create a new group.
+  - Common options: `-g` (specify GID), `-r` (create a system group).
+- `groupmod [options] groupname`: Modify an existing group.
+  - Common options: `-n` (change group name), `-g` (change GID).
+- `groupdel groupname`: Delete a group.
+- `gpasswd [options] groupname`: Administer members of a group.
+  - Common options: `-a` (add user), `-d` (remove user), `-M` (set group members).
+- `newgrp [options] groupname`: Change the current group ID during a login session.
+- `groups [username]`: Display group memberships for the current user or the specified user.
+
+Deze commands moeten worden uitgevoerd met sudo of als root. Daarnaast kan je de handleidingpagina's ook gebruiken (e.g., `man useradd`, `man groupadd`) voor meer details.
