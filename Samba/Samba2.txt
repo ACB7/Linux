@@ -1,0 +1,39 @@
+
+
+
+
+1. maak een map aan in home met de naam shared
+mkdir shared
+2. maak in deze map een map aan met jouw naam
+home/shared: mkdir naam
+3.maak de groep users eigenaar van de map naam
+chgrp users naam
+4. zet de rechten op rwxrwxr--:
+chomd 774 naam
+5. maak een user aan met de naam frits:
+useradd -m frits
+6. maak een wachtwoord aan voor de gebruiker frits
+passwd frits
+7.maak voor deze gebruiker een samba wachtwoord
+smbpasswd -a frits
+8.open vi het betsand /etc/samba/smb.conf
+/etc/samba: nano smb.conf
+9. zet de vier onderstaande regels onderaan het betsand en sla het betsand op:
+[naam]
+path = /home/shared
+writeable = yes
+comment = " geshared map van naam"
+10. sla het bestand op met:
+^ betekent ctrl
+11. zet nu smb aan
+systemctl start smb.service
+12. zet nu nmb aan
+systemctl start nmb.service
+13. zet firewall uit
+systemctl stop firewalld.service
+14.om ip addres te laten zien:
+ip a
+
+15. ga naar windows,pc ,netwerkverbindingen
+\\ ip addres\ naam van share
+16. inloggen op de gebruiker die je hebt aangemaakt hier is het frits
