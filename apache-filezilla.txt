@@ -1,0 +1,91 @@
+
+1.controleer of apache2 erop staat
+zypper search apache2
+
+2.zo niet instaleren
+zypper install apache2
+
+3.start apache2
+systemctl start apache2.service
+
+4.en stop de firewall door:
+systemctl stop firewalld.service
+
+5.vervolgens ga je naar:
+cd /srv/www/htdocs
+
+6.hier ga je naar index.html
+nano index.html
+
+7.en voer je hier jetekst in en sla je op door:
+cntrl o
+
+ 
+
+virtuele hosts
+1.ga naar:
+cd /srv/www/vhosts
+bestaat vhosts niet maak hem dan aan door mkdir
+
+2.maak hier 2 mappen aan alicia.test eksi.test:
+mkdir alicia.test
+mkdir eksi.test
+
+3.ga naar de map alicia.test
+cd /alicia.test
+
+4.maak ik een vi index.html aan
+nano index.html
+doe dit ook voor de andere
+
+5. ga naar /etc/apache2/vhosts.d
+cd /etc/apache2/vhosts.d
+
+6.kopieer vhost.template naar alicia.conf
+cp vhost.template alicia.conf
+cp vhost.template eksi.conf
+
+7.ga naar vi alicia.conf
+voer dit in vervangt de tekst
+:1,$ s/dummy-host.example.com/alicia.test/
+
+8.controleer of <VirtualHost *:80>www
+vi alicia.conf
+onder server naam voeg je dit toe
+i = insert
+:wq = opslaan
+
+9.ga naar vi /etc/apache2/listen.conf
+vi /etc/apache2/listen.conf
+kijk of hier NameVirtualHost *:80
+zo niet voeg toe onder listen 80
+i = insert
+:wq = oplsaan
+
+10. ga naar vi /etc/hosts
+en voeg daar je ip en map toe
+192.168.121.131 alicia.test
+192.168.121.131 eksi.test
+:qw opslaan
+
+ 
+
+filezilla
+1.installer als vsftpd
+zypper instal vsftpd
+
+2.open
+vi /etc/vsftpd.conf
+3. verander write_able = no
+
+moet zijn write_able = yes
+
+zorg ervoor dat local_enable= yes
+sla het bestand op :wq
+
+4. restart het vsftpd
+systemctl restart vsftpd.service
+
+4. ip add show
+kopieer ip add
+naar fillezilla
