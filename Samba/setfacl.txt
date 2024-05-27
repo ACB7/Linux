@@ -1,0 +1,8 @@
+
+setfacl -m g:{groep}:r-x {map}
+setfacl -m u:{User}:r-x {map}
+dit Kent rechten toe op een map/bestand aan een gebruiker of groep. 
+als ik gebruiker1 alleen lees rechten wil geven ook al zit hij in een groep met full acces doe ik: setfacl -m u:gebruiker1:r— home/mijnsamba
+
+als alternatief:
+valid users = {user}/{@groups} in de smb.conf
