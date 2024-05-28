@@ -1,0 +1,35 @@
+sudo zypper install samba
+sudo mkdir -p /srv/samba/makelaars
+sudo mkdir -p /srv/samba/secretaressen
+sudo groupadd makelaars
+sudo groupadd secretaressen
+sudo useradd -m -G makelaars makelaar_test
+sudo useradd -m -G secretaressen secretaresse_test
+
+sudo passwd makelaar_test
+sudo passwd secretaresse_test
+sudo chown root:makelaars /srv/samba/makelaars
+sudo chown root:secretaressen /srv/samba/secretaressen
+
+sudo chmod 2770 /srv/samba/makelaars
+sudo chmod 2770 /srv/samba/secretaressen
+sudo nano /etc/samba/smb.conf
+[makelaars]
+path = /srv/samba/makelaars
+valid users = @makelaars
+read only = no
+create mask = 0660
+directory mask = 2770
+
+[secretaressen]
+path = /srv/samba/secretaressen
+valid users = @secretaressen
+read only = no
+create mask = 0660
+directory mask = 2770
+sudo smbpasswd -a makelaar_test
+sudo smbpasswd -a secretaresse_test
+sudo systemctl restart smb
+sudo systemctl enable smb
+smbclient //hostname/makelaars -U makelaar_test
+smbclient //hostname/secretaressen -U secretaresse_test
